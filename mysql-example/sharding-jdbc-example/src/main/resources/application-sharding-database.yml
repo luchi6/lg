@@ -17,17 +17,19 @@ spring:
     #分库分表
     sharding:
       tables:
+
         position: #数据库中要分表的逻辑名
           #配置主键生成策略
           key-generator:
             column: id
-#            type: SNOWFLAKE #雪花算法
+            #type: SNOWFLAKE #雪花算法
             type: Luch #雪花算法
           #分库
           databaseStrategy:
             inline:
               shardingColumn: id
               algorithmExpression: ds${id % 2}
+
         position_detail: #数据库中要分表的逻辑名
           #配置主键生成策略
           key-generator:
@@ -39,6 +41,22 @@ spring:
             inline:
               shardingColumn: pid
               algorithmExpression: ds${pid % 2}
+
+        b_order:
+          actualDataNodes: ds${0..1}.b_order_${0..1}
+          #分库
+          databaseStrategy:
+            inline:
+              shardingColumn: companyId
+              algorithmExpression: ds${companyId % 2}
+          #分表
+          tableStrategy:
+            inline:
+              shardingColumn: id
+              algorithmExpression: b_order_${id % 2}
+          keyGenerator:
+            type: SNOWFLAKE
+            column: id
       #广播表，每个库中的表数据都一样
       broadcast-tables:
       - city
