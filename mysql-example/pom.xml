@@ -10,11 +10,12 @@
     <version>1.0.0-SNAPSHOT</version>
     <modules>
         <module>sharding-jdbc-example</module>
+        <module>sharding-proxy-example</module>
     </modules>
 
     <properties>
         <springboot.version>2.3.0.RELEASE</springboot.version>
-        <mysql.connector.version>8.0.22</mysql.connector.version>
+        <mysql.connector.version>8.0.17</mysql.connector.version>
         <sharding.jdbc.version>4.1.0</sharding.jdbc.version>
         <sharding.saga.version>4.0.0-RC2</sharding.saga.version>
     </properties>
