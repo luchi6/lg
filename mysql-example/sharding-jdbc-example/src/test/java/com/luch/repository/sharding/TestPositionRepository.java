@@ -1,7 +1,8 @@
-package com.luch.repository;
+package com.luch.repository.sharding;
 
 import com.luch.RunBoot;
 import com.luch.entity.Position;
+import com.luch.repository.PositionRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

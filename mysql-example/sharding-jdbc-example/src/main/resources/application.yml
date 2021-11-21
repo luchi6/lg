@@ -1,6 +1,8 @@
 spring:
   profiles:
-    active: sharding-database
+#    active: sharding-database
+#    active: master-slave
+    active: hint-database
   shardingsphere:
     props:
       sql.show: true

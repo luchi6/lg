@@ -4,20 +4,20 @@ spring:
       names: ds0,ds1
       ds0:
         type: com.zaxxer.hikari.HikariDataSource
-        driver-class-name: com.mysql.jdbc.Driver
+        driver-class-name: com.mysql.cj.jdbc.Driver
         jdbc-url: jdbc:mysql://localhost:3306/spring-boot_0?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=false
         username: root
         password: root
       ds1:
         type: com.zaxxer.hikari.HikariDataSource
-        driver-class-name: com.mysql.jdbc.Driver
+        driver-class-name: com.mysql.cj.jdbc.Driver
         jdbc-url: jdbc:mysql://localhost:3306/spring-boot_1?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=false
         username: root
         password: root
     #分库分表
     sharding:
       tables:
-
+#===================分库=================================
         position: #数据库中要分表的逻辑名
           #配置主键生成策略
           key-generator:
@@ -41,7 +41,7 @@ spring:
             inline:
               shardingColumn: pid
               algorithmExpression: ds${pid % 2}
-
+#===================分库分表=============================
         b_order:
           actualDataNodes: ds${0..1}.b_order_${0..1}
           #分库
@@ -57,10 +57,12 @@ spring:
           keyGenerator:
             type: SNOWFLAKE
             column: id
-      #广播表，每个库中的表数据都一样
-      broadcast-tables:
-      - city
+#==================广播表=======================
         city:
           key-generator:
             column: id
             type: SNOWFLAKE #雪花算法
+      #广播表，每个库中的表数据都一样
+      broadcast-tables:
+      - city
+
