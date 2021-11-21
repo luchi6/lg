@@ -16,6 +16,7 @@
         <springboot.version>2.3.0.RELEASE</springboot.version>
         <mysql.connector.version>8.0.22</mysql.connector.version>
         <sharding.jdbc.version>4.1.0</sharding.jdbc.version>
+        <sharding.saga.version>4.0.0-RC2</sharding.saga.version>
     </properties>
 
     <dependencyManagement>
@@ -44,6 +45,23 @@
             <dependency>
                 <groupId>org.apache.shardingsphere</groupId>
                 <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
+                <version>${sharding.jdbc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shardingsphere</groupId>
+                <artifactId>sharding-transaction-xa-core</artifactId>
+                <version>${sharding.jdbc.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.shardingsphere</groupId>
+                <artifactId>sharding-transaction-base-saga</artifactId>
+                <!--<version>${sharding.saga.version}</version>-->
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.shardingsphere</groupId>
+                <artifactId>sharding-transaction-base-seata-at</artifactId>
                 <version>${sharding.jdbc.version}</version>
             </dependency>
         </dependencies>
