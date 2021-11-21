@@ -1,0 +1,33 @@
+spring:
+  shardingsphere:
+    datasource:
+      names: ds0
+      ds0:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://localhost:3306/spring-boot_0?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: root
+        password: root
+    encrypt:
+      tables:
+        c_user:
+          columns:
+            pwd:
+              #明文列,可选，有的表设计时无明文列
+              plain-column: pwd_plain
+              #密文列
+              cipher-column: pwd_cipher
+              encryptor: luch_pwd
+          key-generator:
+            column: id
+            type: SNOWFLAKE #雪花算法
+      encryptors:
+        luch_pwd:
+          type: aes
+          props.aes.key.value: 1234
+    props:
+      query:
+        with:
+          cipher:
+            #默认为true，使用密文查询，false：使用明文查询
+            column: true
